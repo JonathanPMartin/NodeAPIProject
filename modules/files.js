@@ -8,6 +8,9 @@ class Files{
         userid INTEGER,\
         uploadname TEXT NOT NULL,\
         filetype TEXT NOT NULL,\
+        file TEXT NOT NULL,\
+        filesize TEXT NOT NULL,\
+        description TEXT,\
         FOREIGN KEY(userid) REFERENCES users(id)\
       );'
       await this.db.run(sql)

@@ -1,12 +1,12 @@
 
 import Router from 'koa-router'
-
+import testRouter from './upload.js'
 import publicRouter from './public.js'
 import secureRouter from'./secure.js'
 
 const mainRouter = new Router()
 
-const nestedRoutes = [publicRouter, secureRouter]
+const nestedRoutes = [publicRouter, secureRouter,testRouter]
 for (const router of nestedRoutes) {
 	mainRouter.use(router.routes())
 	mainRouter.use(router.allowedMethods())

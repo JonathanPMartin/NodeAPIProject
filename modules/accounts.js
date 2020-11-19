@@ -1,4 +1,3 @@
-
 /** @module Accounts */
 
 import bcrypt from 'bcrypt-promise'
