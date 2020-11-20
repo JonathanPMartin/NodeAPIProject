@@ -12,10 +12,24 @@
 </head>
 <body>
   
-  <form method="post" action="/quote" enctype="multipart/form-data">
-  <label>file: <input type="file" name="myfile" multiple />
-  </label>
-  <input type="submit" />
+  <form method="post" action="/test" enctype="multipart/form-data">
+    <p><label value="{{filenmae}}">click here to upload file: 
+      <input type="file" name="myfile" multiple />
+    </label>
+    </p>
+    <p>
+    <label>Name of Upload: 
+      <input type="text" name="nameofupload" value="{{nameofupload}}"/>
+    </label>
+    </p>
+    <p>
+    <label>Details of Upload: 
+      <textarea name="Details"value="{{Details}}"></textarea>
+    </label>
+    </p>
+    <p>
+      <button>sumbit</button>
+    </p>  
   </form>
 </body>
 </html>
