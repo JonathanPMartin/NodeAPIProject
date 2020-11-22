@@ -19,7 +19,9 @@ router.get('/', async ctx => {
     const records =await files.all()
     console.log(records)
     ctx.hbs.records=records
+    
 		await ctx.render('secure', ctx.hbs)
+    await files.close()
 	} catch(err) {
 		ctx.hbs.error = err.message
 		await ctx.render('error', ctx.hbs)
