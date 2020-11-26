@@ -20,11 +20,13 @@ app.use( async(ctx, next) => {
 })
 
 router.get('/', async ctx => {
-  await ctx.render('upload')
-  console.log(ctx.hbs.data)
+  await ctx.render('upload',ctx.hbs)
+  
 })
 
 router.post('/', async ctx => {
+  //import Files from '../modules/files.js'
+  //const files=await new Files(dbName)
   console.log(ctx.request.body)
   console.log(ctx.request.files.myfile)
   const myfile = ctx.request.files.myfile
@@ -38,9 +40,9 @@ router.post('/', async ctx => {
   const data={
     userid : ctx.hbs.userid,
     uploadname : Name,
-    filetype : myfile.type
+    filetype : myfile.extension
   }
- //const files=await new Files(dbName)
+ 
  //const records =await files.all()
  //const x= myfile.type
  //const y=ctx.hbs.userid
@@ -48,7 +50,8 @@ router.post('/', async ctx => {
  //console.log(x)
   //await files.add()
   //await files.close()
-  ctx.hbs.data=data
+  console.log(data)
+  ctx.session.data='test'
   console.log(`mime-type: ${myfile.type}`)
   console.log(`correct file extension: ${myfile.extension}`)
   console.log(`file size (in bytes): ${myfile.size}`)
@@ -58,10 +61,17 @@ router.post('/', async ctx => {
   } catch(err) {
     console.log(err.message)
   } finally {
-    ctx.redirect('/test')
+    //await files.add()
+    ctx.session.data='test'
+    ctx.hbs.data='test'
+    ctx.fuckit='test'
+    console.log('yer gonna try this shit again')
+    ctx.redirect(`/secure?filetype=${myfile.extension}+&filename=${Name}&dis=${dis}`)
   }
 })
 router.get('/', async ctx => {
+  console.log('testing my dumb idea')
+  console.log(ctx.request.body)
   if (ctx.hbs.data !==null){
       console.log(ctx.hbs.data)
       await files.add(ctx.hbs.data)
