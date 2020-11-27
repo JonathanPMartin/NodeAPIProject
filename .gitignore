@@ -9,6 +9,7 @@ data/
 coverage/
 sessions/
 screenshots/
+uploads/
 __image_snapshots_/
 __diff_output__/
 trace/

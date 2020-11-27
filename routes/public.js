@@ -16,14 +16,14 @@ const dbName = 'website.db'
  */
 router.get('/', async ctx => {
 	try {
-    if(ctx.hbs.authorised){
-      return ctx.redirect('/secure?msg=you are logged in...')
-    }else{
-      return ctx.redirect('/login?msg= you need to log in')
-    }
-  }catch(err){
-    await ctx.render('error, ctx.hbs')
-  }
+		if(ctx.hbs.authorised) {
+			return ctx.redirect('/secure?msg=you are logged in...')
+		}else{
+			return ctx.redirect('/login?msg= you need to log in')
+		}
+	}catch(err) {
+		await ctx.render('error, ctx.hbs')
+	}
 })
 
 
