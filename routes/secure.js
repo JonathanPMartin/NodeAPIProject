@@ -5,7 +5,7 @@ const dbName ='website.db'
 const router = new Router({ prefix: '/secure' })
 async function checkAuth(ctx, next) {
 	console.log('secure router middleware')
-  console.log(ctx.hbs.userid)
+	console.log(ctx.hbs.userid)
 	if(ctx.hbs.authorised !== true) return ctx.redirect('/login?msg=you need to log in&referrer=/secure')
 	if(ctx.hbs.dis !== undefined) {
 		const data={
@@ -28,7 +28,7 @@ router.get('/', async ctx => {
 	try {
 		const records =await files.all(ctx.hbs.userid)
 		//const records =await files.getByID(1)
-    console.log('records')
+		console.log('records')
 		console.log(records)
 		ctx.hbs.records=records
 		await ctx.render('secure', ctx.hbs)

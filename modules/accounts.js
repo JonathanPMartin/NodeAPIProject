@@ -64,13 +64,13 @@ class Accounts {
 		if(valid === false) throw new Error(`invalid password for account "${username}"`)
 		return true
 	}
-  async find(username){
-   let sql=`SELECT users.* FROM users\
+	async find(username) {
+		const sql=`SELECT users.* FROM users\
       WHERE users.user ="${username}"`
-   const files = await this.db.all(sql)
-   return files
-  }
-  
+		const files = await this.db.all(sql)
+		return files
+	}
+
 
 	async close() {
 		await this.db.close()
