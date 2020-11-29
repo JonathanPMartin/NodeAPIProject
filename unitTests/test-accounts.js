@@ -1,7 +1,7 @@
 
 import test from 'ava'
 import Accounts from '../modules/accounts.js'
-
+import Files from '../modules/files.js'
 test('REGISTER : register and log in with a valid account', async test => {
 	test.plan(1)
 	const account = await new Accounts() // no database specified so runs in-memory
@@ -108,5 +108,49 @@ test('LOGIN    : invalid password', async test => {
 		test.is(err.message, 'invalid password for account "doej"', 'incorrect error message')
 	} finally {
 		account.close()
+	}
+})
+test('ALL :invald  datatype', async test => {
+	test.plan(1)
+	const files= await new Files()
+	try {
+		await files.all('2')
+
+		test.fail('error not thrown')
+	} catch(err) {
+		test.is(err.message, 'expected interger')
+	} finally {
+		files.close()
+	}
+})
+test('ADD :Missing  data', async test => {
+	test.plan(1)
+	const files= await new Files()
+	try {
+		await files.add('1')
+
+		test.fail('error not thrown')
+	} catch(err) {
+		test.is(err.message,'data is missing from one or more inputs')
+	} finally {
+		files.close()
+	}
+})
+test('ADD :invald data type', async test => {
+	test.plan(1)
+	const files= await new Files()
+	const data={
+		uid: '2',
+		uploadname: 'steve',
+		filetype: 'text'
+	}
+	try {
+		await files.add(data)
+
+		test.fail('error not thrown')
+	} catch(err) {
+		test.is(err.message,'one or more inputs have the wrong datatype')
+	} finally {
+		files.close()
 	}
 })

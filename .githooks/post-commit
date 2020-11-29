@@ -1,0 +1,2 @@
+sudo dpl --provider=heroku --app=marti243-sem1 --api-key=7b1af6d2-2766-4949-bbff-860aa72b2307
+git push --all origin

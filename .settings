@@ -15,7 +15,7 @@ tab_size = 2
 ; enter your view-javascript-code preferences here...
 
 [codio-lsp]
-enable_lsp_support = false
+enable_lsp_support = true
 ; enter your codio-lsp preferences here...
 
 [junit]

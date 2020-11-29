@@ -6,7 +6,9 @@ const router = new Router({ prefix: '/secure' })
 async function checkAuth(ctx, next) {
 	console.log('secure router middleware')
 	console.log(ctx.hbs.userid)
-	if(ctx.hbs.authorised !== true) return ctx.redirect('/login?msg=you need to log in&referrer=/secure')
+	if(ctx.hbs.authorised !== true) {
+		return ctx.redirect(`/login?msg=you need to log in&referrer=/secure?userid=${ctx.hbs.userid}`)
+	}
 	if(ctx.hbs.dis !== undefined) {
 		const data={
 			uid: ctx.hbs.userid,
@@ -16,7 +18,7 @@ async function checkAuth(ctx, next) {
 		const files=await new Files(dbName)
 		await files.add(data)
 		await files.close()
-		return ctx.redirect('/secure')
+		return ctx.redirect(`/secure?userid=${ctx.hbs.userid}`)
 	}
 	await next()
 }

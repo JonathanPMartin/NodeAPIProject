@@ -18,19 +18,32 @@ class Files {
 		})()
 	}
 	async add(data) {
-		console.log('testing if it reads')
-		console.log(data)
-		const sql=`INSERT INTO homepage(userid, uploadname, filetype)\
+		if (typeof data.uid==='interger'&& typeof data.uploadname==='string' && typeof data.filetype==='string') {
+			console.log('testing if it reads')
+			console.log(data)
+			const sql=`INSERT INTO homepage(userid, uploadname, filetype)\
     VALUES(${data.uid}, "${data.uploadname}", "${data.filetype}")`
-		console.log(sql)
-		await this.db.run(sql)
-		return true
+			console.log(sql)
+			await this.db.run(sql)
+			return true
+		}else{
+			if(typeof data.uid==='undefined'|| typeof data.uploadname==='undefined' || typeof data.filetype==='undefined') {
+				throw new Error('data is missing from one or more inputs')
+			}else{
+
+				throw new Error('one or more inputs have the wrong datatype')
+			}
+		}
 	}
 	async all(id) {
-		const sql=`SELECT users.user, homepage.* FROM homepage, users\
+		if (typeof id==='interger') {
+			const sql=`SELECT users.user, homepage.* FROM homepage, users\
       WHERE homepage.userid = users.id AND homepage.userid="${id}"`
-		const files = await this.db.all(sql)
-		return files
+			const files = await this.db.all(sql)
+			return files
+		}else{
+			throw new Error('expected interger')
+		}
 	}
 
 	async close() {
