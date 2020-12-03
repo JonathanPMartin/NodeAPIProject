@@ -24,17 +24,18 @@
        <!--<p><a href="../avatars/avatar.png" download="w3logo">
         <img src="../avatars/avatar.png" alt="W3Schools" width="104" height="142">
       </a></p>   working download function-->
-      <p>This is a secure page. Users need to have a valid account and be logged in to see it.</p>
-      <p><a href="/test?userid={{userid}}">Upload new File:</a></p>
+      <p>This is the Homepage. Users need to have a valid account and be logged in to see it.</p>
+      
       <table>
         <tr><th>Name</th><th>FileType</th></tr>
         {{#each records}}
           <tr>
-            <td>{{this.uploadname}}</td>
+            <td><a href="/details?userid={{userid}}+&column={{this.id}}">{{this.uploadname}}</a></td>
             <td>{{this.filetype}}</td>
           </tr>
         {{/each}}
       </table>
+      <p><a href="/test?userid={{userid}}">Upload new File:</a></p>
 		</main>
 	</body>
 </html>

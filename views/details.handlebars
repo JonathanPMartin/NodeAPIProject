@@ -1,0 +1,35 @@
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Home Page</title>
+		<meta name="description" content="form to add new books">
+		<meta name="author" content="Mark Tyers">
+		<link href="{{host}}/style.css" type="text/css" rel="stylesheet" />
+	</head>
+  <body>
+		<header>
+		<h1>Detials Page</h1>
+		<a href="/logout">Log out</a>
+		</header>
+		{{#if msg}}
+ 			<aside>
+				<p class="msg">{{msg}}</p>
+			</aside>
+		{{/if}}
+    <main>
+      <p>This is the Homepage. Users need to have a valid account and be logged in to see it.</p>
+      
+      <table>
+        <tr><th>Details</th><th>Information</th></tr>
+          <tr>
+            <td>Upload Name:</td>
+            <td>{{record.uploadname}}</td>
+        </tr>
+        <tr>
+          <td>File Type:</td>
+          <td>{{record.filetype}}</td>
+        </tr>
+      </table>
+      <p><a href="/secure?userid={{userid}}+&column={{column}}+&delete=true">Delete data:</a></p>
+      <p><a href="/secure?userid={{userid}}">Homepage</a></p>
+       

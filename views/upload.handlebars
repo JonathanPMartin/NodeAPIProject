@@ -8,10 +8,13 @@
   <meta name="description" content="form to upload a new quote">
   <meta name="author" content="John Doe">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" href="style.css">
+  <link href="{{host}}/style.css" type="text/css" rel="stylesheet" />
 </head>
 <body>
-  
+  <header>
+		<h1>Upload Page</h1>
+		<a href="/logout">Log out</a>
+  </header>
   <form method="post" action="/test?userid={{userid}}" enctype="multipart/form-data">
     <p><label>click here to upload file: 
       <input type="file" name="myfile" value="{{myfile}}" multiple required />

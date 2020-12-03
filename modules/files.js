@@ -18,7 +18,7 @@ class Files {
 		})()
 	}
 	async add(data) {
-		if (typeof data.uid==='interger'&& typeof data.uploadname==='string' && typeof data.filetype==='string') {
+		if (typeof data.uid==='string'&& typeof data.uploadname==='string' && typeof data.filetype==='string') {
 			console.log('testing if it reads')
 			console.log(data)
 			const sql=`INSERT INTO homepage(userid, uploadname, filetype)\
@@ -35,20 +35,30 @@ class Files {
 			}
 		}
 	}
-	async all(id) {
-		if (typeof id==='interger') {
+	async all(userid) {
+		if (typeof userid==='string') {
 			const sql=`SELECT users.user, homepage.* FROM homepage, users\
-      WHERE homepage.userid = users.id AND homepage.userid="${id}"`
+      WHERE homepage.userid = users.id AND homepage.userid="${userid}"`
 			const files = await this.db.all(sql)
 			return files
 		}else{
 			throw new Error('expected interger')
 		}
 	}
+  async delete(id){
+    const sql=`DELETE FROM homepage\
+    WHERE homepage.id="${id}"`
+    await this.db.run(sql)
+  }
+  async column(id){
+    const sql=`SELECT homepage.* FROM homepage\
+     WHERE homepage.id="${id}"`
+		const files = await this.db.all(sql)
+		return files
+  }
 
 	async close() {
 		await this.db.close()
-		console.log('weird')
 	}
 }
 export default Files

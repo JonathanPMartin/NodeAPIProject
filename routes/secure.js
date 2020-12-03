@@ -9,6 +9,12 @@ async function checkAuth(ctx, next) {
 	if(ctx.hbs.authorised !== true) {
 		return ctx.redirect(`/login?msg=you need to log in&referrer=/secure?userid=${ctx.hbs.userid}`)
 	}
+  if (ctx.hbs.delete !== undefined){
+    const files= await new Files(dbName)
+    await files.delete(ctx.hbs.column)
+    await files.close()
+    return ctx.redirect(`/secure?userid=${ctx.hbs.userid}`)
+  }
 	if(ctx.hbs.dis !== undefined) {
 		const data={
 			uid: ctx.hbs.userid,
@@ -29,7 +35,6 @@ router.get('/', async ctx => {
 	const files=await new Files(dbName)
 	try {
 		const records =await files.all(ctx.hbs.userid)
-		//const records =await files.getByID(1)
 		console.log('records')
 		console.log(records)
 		ctx.hbs.records=records
@@ -38,8 +43,9 @@ router.get('/', async ctx => {
 	} catch(err) {
 		ctx.hbs.error = err.message
 		await ctx.render('error', ctx.hbs)
+    console.log(err)
 	}
 })
-router.get
+
 
 export default router
