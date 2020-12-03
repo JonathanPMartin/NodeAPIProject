@@ -1,1 +1,2 @@
-npm run linter -- --fix
+#npm run linter -- --fix
+sudo chown -R codio:codio . && sudo chmod -R 775 . 

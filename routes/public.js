@@ -23,7 +23,7 @@ router.get('/', async ctx => {
 		}
 	}catch(err) {
 		await ctx.render('error, ctx.hbs')
-    console.log(err)
+		console.log(err)
 	}
 })
 

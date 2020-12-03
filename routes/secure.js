@@ -9,17 +9,20 @@ async function checkAuth(ctx, next) {
 	if(ctx.hbs.authorised !== true) {
 		return ctx.redirect(`/login?msg=you need to log in&referrer=/secure?userid=${ctx.hbs.userid}`)
 	}
-  if (ctx.hbs.delete !== undefined){
-    const files= await new Files(dbName)
-    await files.delete(ctx.hbs.column)
-    await files.close()
-    return ctx.redirect(`/secure?userid=${ctx.hbs.userid}`)
-  }
-	if(ctx.hbs.dis !== undefined) {
+	if (ctx.hbs.delete !== undefined) {
+		const files= await new Files(dbName)
+		await files.delete(ctx.hbs.column)
+		await files.close()
+		return ctx.redirect(`/secure?userid=${ctx.hbs.userid}`)
+	}
+	if(ctx.hbs.des !== undefined) {
 		const data={
 			uid: ctx.hbs.userid,
 			uploadname: ctx.hbs.filename,
-			filetype: ctx.hbs.filetype
+			filetype: ctx.hbs.filetype,
+			file: ctx.hbs.file,
+			filesize: ctx.hbs.filesize,
+			des: ctx.hbs.des
 		}
 		const files=await new Files(dbName)
 		await files.add(data)
@@ -43,7 +46,7 @@ router.get('/', async ctx => {
 	} catch(err) {
 		ctx.hbs.error = err.message
 		await ctx.render('error', ctx.hbs)
-    console.log(err)
+		console.log(err)
 	}
 })
 

@@ -23,22 +23,22 @@ router.get('/', async ctx => {
 
 router.post('/', async ctx => {
 	const myfile = ctx.request.files.myfile
-	const Name =ctx.request.body.nameofupload
-	const dis=ctx.request.body.Details
+	const body =ctx.request.body
+	let str=''
+	for(let i = 0; i < myfile.name.length; i++) {
+		if (myfile.name[i]==='.') {
+			let j=i
+			for(j; j<myfile.name.length; j++) {
+				str=str+myfile.name[j]
+			}
+		}
+	}
 	myfile.extension = mime.extension(myfile.type)
-	console.log(`original filename: ${myfile.name}`)
-	console.log(Name)
-	console.log(dis)
-	console.log(`correct file extension: ${myfile.fileExtension}`)
-	console.log(`file size (in bytes): ${myfile.size}`)
-	console.log(`temp upload directory and name: ${myfile.path}`)
 	try {
-		await fs.copy(myfile.path, `uploads/${myfile.name}`)
+		await fs.copy(myfile.path, `public/uploads/${myfile.name}`)
+		ctx.redirect(`/secure?filetype=${str}+&filename=${body.nameofupload}&des=${body.Details}&userid=${ctx.hbs.userid}&file=${myfile.name}&filesize=${myfile.size}`)
 	} catch(err) {
 		console.log(err.message)
-	} finally {
-		console.log('yer gonna try this shit again')
-		ctx.redirect(`/secure?filetype=${myfile.extension}+&filename=${Name}&dis=${dis}&userid=${ctx.hbs.userid}`)
 	}
 })
 

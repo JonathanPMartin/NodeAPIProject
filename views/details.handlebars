@@ -8,7 +8,7 @@
 	</head>
   <body>
 		<header>
-		<h1>Detials Page</h1>
+		<h1>Details Page</h1>
 		<a href="/logout">Log out</a>
 		</header>
 		{{#if msg}}
@@ -28,6 +28,23 @@
         <tr>
           <td>File Type:</td>
           <td>{{record.filetype}}</td>
+          
+        </tr>
+        <tr>
+          <td>File size:</td>
+          <td>{{record.filesize}} Bites</td>
+        </tr>
+        <tr>
+          <td>Description of file:</td>
+          <td>{{record.description}}</td>
+        </tr>
+        <tr>
+        </tr>
+        <tr>
+          <td>Download</td>
+          <td> <a href="../uploads/{{record.file}}" download> link
+            </a>
+          </td>
         </tr>
       </table>
       <p><a href="/secure?userid={{userid}}+&column={{column}}+&delete=true">Delete data:</a></p>
