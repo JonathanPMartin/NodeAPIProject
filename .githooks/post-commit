@@ -1,7 +1,2 @@
 git push heroku master
 git push --all origin
-
-
-for some reason after each commit the code resets read functionality so this code is ran ensure that it doesnt have to be repated
-sudo chown -R codio:codio .
-sudo chmod -R 775 .
