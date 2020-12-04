@@ -1,2 +1,2 @@
-#npm run linter -- --fix
-sudo chown -R codio:codio . && sudo chmod -R 775 . 
+#linter fix is in pre commit to ensure code quality before impleiation
+npm run linter -- --fix

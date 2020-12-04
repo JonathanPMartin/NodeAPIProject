@@ -28,15 +28,15 @@ router.post('/', async ctx => {
 	for(let i = 0; i < myfile.name.length; i++) {
 		if (myfile.name[i]==='.') {
 			let j=i
-			for(j; j<myfile.name.length; j++) {
-				str=str+myfile.name[j]
-			}
+			for(j; j<myfile.name.length; j++) str=str+myfile.name[j]
+
 		}
 	}
 	myfile.extension = mime.extension(myfile.type)
 	try {
 		await fs.copy(myfile.path, `public/uploads/${myfile.name}`)
-		ctx.redirect(`/secure?filetype=${str}+&filename=${body.nameofupload}&des=${body.Details}&userid=${ctx.hbs.userid}&file=${myfile.name}&filesize=${myfile.size}`)
+		ctx.redirect(`/secure?filetype=${str}+&filename=${body.nameofupload}&des=${body.Details}&\
+userid=${ctx.hbs.userid}&file=${myfile.name}&filesize=${myfile.size}`)
 	} catch(err) {
 		console.log(err.message)
 	}

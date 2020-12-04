@@ -9,6 +9,7 @@ async function checkAuth(ctx, next) {
 	if(ctx.hbs.authorised !== true) {
 		return ctx.redirect(`/login?msg=you need to log in&referrer=/secure?userid=${ctx.hbs.userid}`)
 	}
+	if(ctx.hbs.userid === undefined) return ctx.redirect('/logout')
 	if (ctx.hbs.delete !== undefined) {
 		const files= await new Files(dbName)
 		await files.delete(ctx.hbs.column)

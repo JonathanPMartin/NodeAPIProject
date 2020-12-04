@@ -18,22 +18,16 @@ class Files {
 		})()
 	}
 	async add(data) {
-		if (typeof data.uid==='string'&& typeof data.uploadname==='string' && typeof data.filetype==='string') {
-			console.log('testing if it reads')
-			console.log(data)
-			const sql=`INSERT INTO files(userid, uploadname, filetype,file,filesize,description)\
-    VALUES(${data.uid}, "${data.uploadname}", "${data.filetype}", "${data.file}", "${data.filesize}", "${data.des}")`
-			console.log(sql)
-			await this.db.run(sql)
-			return true
-		}else{
-			if(typeof data.uid==='undefined'|| typeof data.uploadname==='undefined' || typeof data.filetype==='undefined') {
-				throw new Error('data is missing from one or more inputs')
-			}else{
-
-				throw new Error('one or more inputs have the wrong datatype')
-			}
+		for (const item in data) {
+			if (typeof data[item]!=='string') throw new Error(data.item)
 		}
+		console.log('testing if it reads')
+		console.log(data)
+		const sql=`INSERT INTO files(userid, uploadname, filetype,file,filesize,description)\
+    VALUES(${data.uid}, "${data.uploadname}", "${data.filetype}", "${data.file}", "${data.filesize}", "${data.des}")`
+		console.log(sql)
+		await this.db.run(sql)
+		return true
 	}
 	async all(userid) {
 		if (typeof userid==='string') {

@@ -1,0 +1,2 @@
+live site: https://marti243-sem1.herokuapp.com
+there is a system of a redirct to a reddict in upload.js to secure.js. this is to upload data to the database and then to remove all the infomation used to create it, as all data was passed via the url.
