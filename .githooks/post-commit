@@ -1,2 +1,7 @@
-sudo dpl --provider=heroku --app=marti243-sem1 --api-key=7b1af6d2-2766-4949-bbff-860aa72b2307
+git push heroku master
 git push --all origin
+
+
+for some reason after each commit the code resets read functionality so this code is ran ensure that it doesnt have to be repated
+sudo chown -R codio:codio .
+sudo chmod -R 775 .
