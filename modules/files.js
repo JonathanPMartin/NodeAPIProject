@@ -20,7 +20,9 @@ class Files {
 	async add(data) { //has tests for undefined data for all ellements in data
 		const vals=['uid','uploadname','filetype','file','filesize','des']
 		for (const item in vals) {
-			if (typeof data[vals[item]]!=='string') throw new Error(`string is expected for ${vals[item]} not ${typeof data[vals[item]]}`)
+			if (typeof data[vals[item]]!=='string') {
+				throw new Error(`string is expected for ${vals[item]} not ${typeof data[vals[item]]}`)
+			}
 		}
 		const sql=`INSERT INTO files(userid, uploadname, filetype,file,filesize,description)\
     VALUES(${data.uid}, "${data.uploadname}", "${data.filetype}", "${data.file}", "${data.filesize}", "${data.des}")`

@@ -285,7 +285,7 @@ test('ADD :error if ino data is given for des', async test => {
 		filetype: '.txt',
 		file: 'dumbyfile.txt',
 		filesize: '1000',
-		
+
 	}
 	try {
 		await files.add(data)
