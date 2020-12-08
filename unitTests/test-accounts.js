@@ -2,6 +2,7 @@
 import test from 'ava'
 import Accounts from '../modules/accounts.js'
 import Files from '../modules/files.js'
+const dbName ='website.db'
 test('REGISTER : register and log in with a valid account', async test => {
 	test.plan(1)
 	const account = await new Accounts() // no database specified so runs in-memory
@@ -110,37 +111,37 @@ test('LOGIN    : invalid password', async test => {
 		account.close()
 	}
 })
-test('ALL :invald  datatype', async test => {
+test('ALL :error if invald  datatype given', async test => {
 	test.plan(1)
-	const files= await new Files()
+	const files= await new Files(dbName)
 	try {
-		await files.all('2')
+		await files.all(1)
 
 		test.fail('error not thrown')
 	} catch(err) {
-		test.is(err.message, 'expected interger')
+		test.is(err.message, 'expected string')
 	} finally {
 		files.close()
 	}
 })
-test('ADD :Missing  data', async test => {
+test('ADD :error if Missing  data', async test => {
 	test.plan(1)
-	const files= await new Files()
+	const files= await new Files(dbName)
 	try {
-		await files.add('1')
+		await files.add(1)
 
 		test.fail('error not thrown')
 	} catch(err) {
-		test.is(err.message,'data is missing from one or more inputs')
+		test.is(err.message,'SQLITE_ERROR: no such column: undefined')
 	} finally {
 		files.close()
 	}
 })
-test('ADD :invald data type', async test => {
+test('ADD :error if invald data type given', async test => {
 	test.plan(1)
-	const files= await new Files()
+	const files= await new Files(dbName)
 	const data={
-		uid: '2',
+		uid: 2,
 		uploadname: 'steve',
 		filetype: 'text'
 	}
@@ -149,8 +150,56 @@ test('ADD :invald data type', async test => {
 
 		test.fail('error not thrown')
 	} catch(err) {
-		test.is(err.message,'one or more inputs have the wrong datatype')
+		test.is(err.message,'string is expected for uid not number')
 	} finally {
+		files.close()
+	}
+})
+test('DELETE:  eroor if no id given', async test => {
+	test.plan(1)
+	const files= await new Files(dbName)
+	try {
+		await files.delete()
+		test.fail('error not thrown')
+	}catch(err) {
+		test.is(err.message,'type of id is expected to be string not undefined')
+	}finally{
+		files.close()
+	}
+})
+test('DELETE: error if int id given', async test => {
+	test.plan(1)
+	const files= await new Files(dbName)
+	try {
+		await files.delete(1)
+		test.fail('error not thrown')
+	}catch(err) {
+		test.is(err.message,'type of id is expected to be string not number')
+	}finally{
+		files.close()
+	}
+})
+test('COLUMN: error if no id given', async test => {
+	test.plan(1)
+	const files= await new Files(dbName)
+	try {
+		await files.column()
+		test.fail('error not thrown')
+	}catch(err) {
+		test.is(err.message,'type of id is expected to be string not undefined')
+	}finally{
+		files.close()
+	}
+})
+test('COLUMN: error if int id given', async test => {
+	test.plan(1)
+	const files= await new Files(dbName)
+	try {
+		await files.column(1)
+		test.fail('error not thrown')
+	}catch(err) {
+		test.is(err.message,'type of id is expected to be string not number')
+	}finally{
 		files.close()
 	}
 })

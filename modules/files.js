@@ -19,10 +19,8 @@ class Files {
 	}
 	async add(data) {
 		for (const item in data) {
-			if (typeof data[item]!=='string') throw new Error(data.item)
+			if (typeof data[item]!=='string') throw new Error(`string is expected for ${item} not ${typeof data[item]}`)
 		}
-		console.log('testing if it reads')
-		console.log(data)
 		const sql=`INSERT INTO files(userid, uploadname, filetype,file,filesize,description)\
     VALUES(${data.uid}, "${data.uploadname}", "${data.filetype}", "${data.file}", "${data.filesize}", "${data.des}")`
 		console.log(sql)
@@ -36,21 +34,28 @@ class Files {
 			const files = await this.db.all(sql)
 			return files
 		}else{
-			throw new Error('expected interger')
+			throw new Error('expected string')
 		}
 	}
 	async delete(id) {
-		const sql=`DELETE FROM files\
+		if (typeof id==='string') {
+			const sql=`DELETE FROM files\
     WHERE files.id="${id}"`
-		await this.db.run(sql)
+			await this.db.run(sql)
+		}else{
+			throw new Error(`type of id is expected to be string not ${typeof id}`)
+		}
 	}
 	async column(id) {
-		const sql=`SELECT files.* FROM files\
+		if (typeof id==='string') {
+			const sql=`SELECT files.* FROM files\
      WHERE files.id="${id}"`
-		const files = await this.db.all(sql)
-		return files
+			const files = await this.db.all(sql)
+			return files
+		}else{
+			throw new Error(`type of id is expected to be string not ${typeof id}`)
+		}
 	}
-
 	async close() {
 		await this.db.close()
 	}
