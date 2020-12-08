@@ -111,7 +111,7 @@ test('LOGIN    : invalid password', async test => {
 		account.close()
 	}
 })
-test('ALL :error if invald  datatype given', async test => {
+test('ALL :error if invald  userid given', async test => {
 	test.plan(1)
 	const files= await new Files(dbName)
 	try {
@@ -119,31 +119,47 @@ test('ALL :error if invald  datatype given', async test => {
 
 		test.fail('error not thrown')
 	} catch(err) {
-		test.is(err.message, 'expected string')
+		test.is(err.message, 'expected string for userid not number')
 	} finally {
 		files.close()
 	}
 })
-test('ADD :error if Missing  data', async test => {
+test('ALL :error if no userid given', async test => {
 	test.plan(1)
 	const files= await new Files(dbName)
 	try {
-		await files.add(1)
+		await files.all()
 
 		test.fail('error not thrown')
 	} catch(err) {
-		test.is(err.message,'SQLITE_ERROR: no such column: undefined')
+		test.is(err.message, 'expected string for userid not undefined')
 	} finally {
 		files.close()
 	}
 })
-test('ADD :error if invald data type given', async test => {
+test('ADD :error if no data given', async test => {
+	test.plan(1)
+	const files= await new Files(dbName)
+	try {
+		await files.add()
+
+		test.fail('error not thrown')
+	} catch(err) {
+		test.is(err.message,'Cannot read property \'uid\' of undefined')
+	} finally {
+		files.close()
+	}
+})
+test('ADD :error if invald data type given for uid', async test => {
 	test.plan(1)
 	const files= await new Files(dbName)
 	const data={
 		uid: 2,
 		uploadname: 'steve',
-		filetype: 'text'
+		filetype: '.txt',
+		file: 'dumbyfile.txt',
+		filesize: '1000',
+		des: ' dumby description of a non existent file'
 	}
 	try {
 		await files.add(data)
@@ -155,7 +171,233 @@ test('ADD :error if invald data type given', async test => {
 		files.close()
 	}
 })
-test('DELETE:  eroor if no id given', async test => {
+test('ADD :error if invald data type given for uploadname', async test => {
+	test.plan(1)
+	const files= await new Files(dbName)
+	const data={
+		uid: '2',
+		uploadname: null,
+		filetype: '.txt',
+		file: 'dumbyfile.txt',
+		filesize: '1000',
+		des: ' dumby description of a non existent file'
+	}
+	try {
+		await files.add(data)
+
+		test.fail('error not thrown')
+	} catch(err) {
+		test.is(err.message,'string is expected for uploadname not object')
+	} finally {
+		files.close()
+	}
+})
+test('ADD :error if invald data type given for filetype', async test => {
+	test.plan(1)
+	const files= await new Files(dbName)
+	const data={
+		uid: '2',
+		uploadname: 'dumby upload',
+		filetype: null,
+		file: 'dumbyfile.txt',
+		filesize: '1000',
+		des: ' dumby description of a non existent file'
+	}
+	try {
+		await files.add(data)
+
+		test.fail('error not thrown')
+	} catch(err) {
+		test.is(err.message,'string is expected for filetype not object')
+	} finally {
+		files.close()
+	}
+})
+test('ADD :error if invald data type given for file', async test => {
+	test.plan(1)
+	const files= await new Files(dbName)
+	const data={
+		uid: '2',
+		uploadname: 'dumby upload',
+		filetype: '.txt',
+		file: null,
+		filesize: '1000',
+		des: ' dumby description of a non existent file'
+	}
+	try {
+		await files.add(data)
+
+		test.fail('error not thrown')
+	} catch(err) {
+		test.is(err.message,'string is expected for file not object')
+	} finally {
+		files.close()
+	}
+})
+test('ADD :error if invald data type given for filesize', async test => {
+	test.plan(1)
+	const files= await new Files(dbName)
+	const data={
+		uid: '2',
+		uploadname: 'dumby upload',
+		filetype: '.txt',
+		file: 'dumbyfile.txt',
+		filesize: null,
+		des: ' dumby description of a non existent file'
+	}
+	try {
+		await files.add(data)
+
+		test.fail('error not thrown')
+	} catch(err) {
+		test.is(err.message,'string is expected for filesize not object')
+	} finally {
+		files.close()
+	}
+})
+test('ADD :error if invald data type given for des', async test => {
+	test.plan(1)
+	const files= await new Files(dbName)
+	const data={
+		uid: '2',
+		uploadname: 'dumby upload',
+		filetype: '.txt',
+		file: 'dumbyfile.txt',
+		filesize: '1000',
+		des: null
+	}
+	try {
+		await files.add(data)
+
+		test.fail('error not thrown')
+	} catch(err) {
+		test.is(err.message,'string is expected for des not object')
+	} finally {
+		files.close()
+	}
+})
+test('ADD :error if ino data is given for des', async test => {
+	test.plan(1)
+	const files= await new Files(dbName)
+	const data={
+		uid: '2',
+		uploadname: 'dumby upload',
+		filetype: '.txt',
+		file: 'dumbyfile.txt',
+		filesize: '1000',
+		
+	}
+	try {
+		await files.add(data)
+
+		test.fail('error not thrown')
+	} catch(err) {
+		test.is(err.message,'string is expected for des not undefined')
+	} finally {
+		files.close()
+	}
+})
+test('ADD :error if ino data is given for filesize', async test => {
+	test.plan(1)
+	const files= await new Files(dbName)
+	const data={
+		uid: '2',
+		uploadname: 'dumby upload',
+		filetype: '.txt',
+		file: 'dumbyfile.txt',
+		des: ' dumby description of a non existent file'
+	}
+	try {
+		await files.add(data)
+
+		test.fail('error not thrown')
+	} catch(err) {
+		test.is(err.message,'string is expected for filesize not undefined')
+	} finally {
+		files.close()
+	}
+})
+test('ADD :error if ino data is given for file', async test => {
+	test.plan(1)
+	const files= await new Files(dbName)
+	const data={
+		uid: '2',
+		uploadname: 'dumby upload',
+		filetype: '.txt',
+		filesize: '1000',
+		des: ' dumby description of a non existent file'
+	}
+	try {
+		await files.add(data)
+
+		test.fail('error not thrown')
+	} catch(err) {
+		test.is(err.message,'string is expected for file not undefined')
+	} finally {
+		files.close()
+	}
+})
+test('ADD :error if ino data is given for filetype', async test => {
+	test.plan(1)
+	const files= await new Files(dbName)
+	const data={
+		uid: '2',
+		uploadname: 'dumby upload',
+		file: 'dumbyfile.txt',
+		filesize: '1000',
+		des: ' dumby description of a non existent file'
+	}
+	try {
+		await files.add(data)
+
+		test.fail('error not thrown')
+	} catch(err) {
+		test.is(err.message,'string is expected for filetype not undefined')
+	} finally {
+		files.close()
+	}
+})
+test('ADD :error if ino data is given for uploadname', async test => {
+	test.plan(1)
+	const files= await new Files(dbName)
+	const data={
+		uid: '2',
+		filetype: '.txt',
+		file: 'dumbyfile.txt',
+		filesize: '1000',
+		des: ' dumby description of a non existent file'
+	}
+	try {
+		await files.add(data)
+
+		test.fail('error not thrown')
+	} catch(err) {
+		test.is(err.message,'string is expected for uploadname not undefined')
+	} finally {
+		files.close()
+	}
+})
+test('ADD :error if ino data is given for uid', async test => {
+	test.plan(1)
+	const files= await new Files(dbName)
+	const data={
+		uploadname: 'dumby upload',
+		filetype: '.txt',
+		file: 'dumbyfile.txt',
+		filesize: '1000',
+		des: ' dumby description of a non existent file'
+	}
+	try {
+		await files.add(data)
+
+		test.fail('error not thrown')
+	} catch(err) {
+		test.is(err.message,'string is expected for uid not undefined')
+	} finally {
+		files.close()
+	}
+})
+test('DELETE:  error if no id given', async test => {
 	test.plan(1)
 	const files= await new Files(dbName)
 	try {
