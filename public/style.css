@@ -26,7 +26,7 @@ aside {
 header {
 	background-color: #ccc;
 	border-bottom: 5px solid grey;
-	height: 8vw;
+	height: 6em;
 }
 
 h1, h2, h3 {
@@ -38,9 +38,8 @@ h1, h2, h3 {
 h1 {
 	/*padding: 2.6vw;*/
 	padding: 1em;
-	float: left;
 	font-size: 2.3em;
-	margin-left: 6vw;
+	margin-left: 0.001em;
 }
 
 h2 {
@@ -165,13 +164,14 @@ input[type="submit"], header > a, .custom-file-upload {
 	/* border-radius: 0.6vw; */
 }
 
-input[type="submit"]:hover, header > a:hover, .custom-file-upload:hover {
+/*input[type="submit"]:hover, header > a:hover, .custom-file-upload:hover {
   color: grey;
   background-color: white;
-}
+}*/
 
 input[type="text"], input[type="email"], input[type="password"], textarea, select {
 	font-size: 1.3em;
+	
 	text-align: left;
 	width: 250px;
 	border: 1px solid #CCC;
