@@ -25,8 +25,10 @@ aside {
 
 header {
 	background-color: #ccc;
+	border:100%;
 	border-bottom: 5px solid grey;
 	height: 6em;
+	padding: 1em;
 }
 
 h1, h2, h3 {
@@ -71,7 +73,7 @@ header > img {
 
 p, legend {
 	text-align: left;
-	font-size: 14px;
+	font-size: 1.5em;
 }
 
 main {
@@ -173,9 +175,10 @@ input[type="text"], input[type="email"], input[type="password"], textarea, selec
 	font-size: 1.3em;
 	
 	text-align: left;
-	width: 250px;
+	width: 60%;
+	height:20%
 	border: 1px solid #CCC;
-	padding: 0.5vw;
+	padding: 0.05em;
 	/* margin-bottom: 1vw; */
 	/* border-radius: 0.6vw; */
 }
@@ -226,7 +229,7 @@ table {
 	font-size: 1.7em;
 	width: 80%;
 	border: 1px solid #CCC;
-	padding: 0.5vw;
+	padding: 0.5em;
 	/* border: 1px solid grey; */
 	border-collapse: collapse;
 }

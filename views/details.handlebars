@@ -8,7 +8,8 @@
 	</head>
   <body>
 		<header>
-			<a href="/logout">Log out</a>
+			<a href="/homepage?userid={{userid}}">homepage</a>
+			<a href="/logout">logout</a>
 			<h1>Details Page</h1>
 		
 		</header>
@@ -18,8 +19,7 @@
 			</aside>
 		{{/if}}
     <main>
-			<br>
-      <p>This is the Homepage. Users need to have a valid account and be logged in to see it.</p>
+      <p>Here are the details of your file:</p>
       
       <table>
         <tr><th>Details</th><th>Information</th></tr>
@@ -50,5 +50,4 @@
         </tr>
       </table>
       <p><a href="/homepage?userid={{userid}}+&column={{column}}+&delete=true">Delete data:</a></p>
-      <p><a href="/homepage?userid={{userid}}">Homepage</a></p>
        
