@@ -36,9 +36,10 @@ h1, h2, h3 {
 }
 
 h1 {
-	padding: 2.6vw;
+	/*padding: 2.6vw;*/
+	padding: 1em;
 	float: left;
-	font-size: 18px;
+	font-size: 2.3em;
 	margin-left: 6vw;
 }
 
@@ -58,7 +59,7 @@ header > a {
 	margin-top: 3vw;
 	margin-right: 3vw;
 	float: right;
-	font-size: 12px;
+	font-size: 1.3em;
 }
 
 header > img {
@@ -71,7 +72,7 @@ header > img {
 
 p, legend {
 	text-align: left;
-	font-size: 10px;
+	font-size: 14px;
 }
 
 main {
@@ -160,7 +161,7 @@ input[type="submit"], header > a, .custom-file-upload {
   text-align: left;
   text-decoration: none;
   display: inline-block;
-	font-size: font-size: 12.5px;
+	font-size:1.3em;
 	/* border-radius: 0.6vw; */
 }
 
@@ -170,7 +171,7 @@ input[type="submit"]:hover, header > a:hover, .custom-file-upload:hover {
 }
 
 input[type="text"], input[type="email"], input[type="password"], textarea, select {
-	font-size: 12.5px;
+	font-size: 1.3em;
 	text-align: left;
 	width: 250px;
 	border: 1px solid #CCC;
@@ -222,7 +223,7 @@ dd {
 /* ===== TABLES ===== */
 
 table {
-	font-size: 18.5px;
+	font-size: 1.7em;
 	width: 80%;
 	border: 1px solid #CCC;
 	padding: 0.5vw;
@@ -245,7 +246,7 @@ tr:nth-child(odd){
 td {
 	border: 1px solid grey;
 	padding: 0.5vw;
-	font-size: 14.5px;
+	font-size: 1.3em;
 	width: 175px;
 }
 
