@@ -421,11 +421,11 @@ test('DELETE: error if int id given', async test => {
 		files.close()
 	}
 })
-test('COLUMN: error if no id given', async test => {
+test('ROW: error if no id given', async test => {
 	test.plan(1)
 	const files= await new Files(dbName)
 	try {
-		await files.column()
+		await files.row()
 		test.fail('error not thrown')
 	}catch(err) {
 		test.is(err.message,'type of id is expected to be string not undefined')
@@ -433,11 +433,11 @@ test('COLUMN: error if no id given', async test => {
 		files.close()
 	}
 })
-test('COLUMN: error if int id given', async test => {
+test('ROW: error if int id given', async test => {
 	test.plan(1)
 	const files= await new Files(dbName)
 	try {
-		await files.column(1)
+		await files.row(1)
 		test.fail('error not thrown')
 	}catch(err) {
 		test.is(err.message,'type of id is expected to be string not number')

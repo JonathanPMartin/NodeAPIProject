@@ -12,6 +12,7 @@
 </head>
 <body>
   <header>
+		<!--href to homepage redircts with userid in order to display all data uploaded by the user-->
 		<a href="/homepage?userid={{userid}}">Homepage</a>
 		<a href="/logout">Log out</a>
 		<h1>Upload Page</h1>
@@ -19,6 +20,8 @@
 		
   </header>
 	<main></main>
+	<!-- posts to upload with userid to ensure userid is not lost -->
+	<!-- form stores all data inputed by user so it can be accessed by upload.js -->
   <form method="post" action="/upload?userid={{userid}}" enctype="multipart/form-data">
     <p>
 			<br>
@@ -37,6 +40,7 @@
     </label>
     </p>
     <p>
+			<!-- the sumbit button is used to indecate the user is done on the upload page -->
       <button>sumbit</button>
     </p>  
   </form>

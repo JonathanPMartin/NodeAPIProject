@@ -17,7 +17,7 @@ class Files {
 			return this
 		})()
 	}
-	async add(data) { //has tests for undefined data for all ellements in data
+	async add(data) { //adds a new row to the database
 		const vals=['uid','uploadname','filetype','file','filesize','des']
 		for (const item in vals) {
 			if (typeof data[vals[item]]!=='string') {
@@ -30,7 +30,7 @@ class Files {
 		await this.db.run(sql)
 		return true
 	}
-	async all(userid) { //has been tested for all negitive cases
+	async all(userid) { //displays all the user uploads
 		if (typeof userid==='string') {
 			const sql=`SELECT users.user, files.* FROM files, users\
       WHERE files.userid = users.id AND files.userid="${userid}"`
@@ -40,7 +40,7 @@ class Files {
 			throw new Error(`expected string for userid not ${typeof userid}`)
 		}
 	}
-	async delete(id) {//has been tested for all negitive cases
+	async delete(id) {//deletes the row of infromation where the id==id
 		if (typeof id==='string') {
 			const sql=`DELETE FROM files\
     WHERE files.id="${id}"`
@@ -49,7 +49,7 @@ class Files {
 			throw new Error(`type of id is expected to be string not ${typeof id}`)
 		}
 	}
-	async column(id) {//has been tested for all negitive cases
+	async row(id) {//returns the details for the row id
 		if (typeof id==='string') {
 			const sql=`SELECT files.* FROM files\
      WHERE files.id="${id}"`
@@ -59,7 +59,7 @@ class Files {
 			throw new Error(`type of id is expected to be string not ${typeof id}`)
 		}
 	}
-	async close() {
+	async close() {//closes the database
 		await this.db.close()
 	}
 }

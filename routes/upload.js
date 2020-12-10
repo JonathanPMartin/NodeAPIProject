@@ -7,7 +7,6 @@ import mime from 'mime-types'
 const app = new Koa()
 const router = new Router({ prefix: '/upload' })
 app.use(serve('public'))
-// you need to install the "handlebars" package
 app.use(bodyParser({multipart: true}))
 
 
@@ -16,15 +15,16 @@ app.use( async(ctx, next) => {
 	await next()
 })
 
-router.get('/', async ctx => {
+router.get('/', async ctx => {//recorves the handlebars data
 	await ctx.render('upload',ctx.hbs)
 
 })
 
 router.post('/', async ctx => {
-	const myfile = ctx.request.files.myfile
-	const body =ctx.request.body
+	const myfile = ctx.request.files.myfile //stores the info for the file
+	const body =ctx.request.body //stores the info of the body from handlebars
 	let str=''
+	// the code below is used in to get the correct file type as mime type often gives an incorect value
 	for(let i = 0; i < myfile.name.length; i++) {
 		if (myfile.name[i]==='.') {
 			let j=i
@@ -34,7 +34,10 @@ router.post('/', async ctx => {
 	}
 	myfile.extension = mime.extension(myfile.type)
 	try {
+		// saves the file uploaded to public/uploads
 		await fs.copy(myfile.path, `public/uploads/${myfile.name}`)
+		// below redirects to homepage passing filename and des
+		// as the adding proccess for the database did not work with a router.post statememt
 		ctx.redirect(`/homepage?filetype=${str}+&filename=${body.nameofupload}&des=${body.Details}&\
 userid=${ctx.hbs.userid}&file=${myfile.name}&filesize=${myfile.size}`)
 	} catch(err) {

@@ -21,7 +21,7 @@
     <main>
       <p>Here are the details of your file:</p>
       
-      <table>
+      <table> <!-- displays the details of the file by looking at where it is stroed in record -->
         <tr><th>Details</th><th>Information</th></tr>
           <tr>
             <td>Upload Name:</td>
@@ -44,10 +44,12 @@
         </tr>
         <tr>
           <td>Download</td>
+					<!-- link to download file -->
           <td> <a href="../uploads/{{record.file}}" download> link
             </a>
           </td>
         </tr>
       </table>
-      <p><a href="/homepage?userid={{userid}}+&column={{column}}+&delete=true">Delete data:</a></p>
+			<!--link to homepage passing along row and delete as well as userid.delete is used to detect if a row needs to be deleted in homepage -->
+      <p><a href="/homepage?userid={{userid}}+&row={{row}}+&delete=true">Delete data:</a></p>
        

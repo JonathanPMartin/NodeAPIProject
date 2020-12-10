@@ -28,11 +28,14 @@
         <tr><th>Name</th><th>FileType</th></tr>
         {{#each records}}
           <tr>
-            <td><a href="/details?userid={{userid}}+&column={{this.id}}">{{this.uploadname}}</a></td>
+						<!--calls the details page passing along the row value-->
+            <td><a href="/details?userid={{userid}}+&row={{this.id}}">{{this.uploadname}}</a></td>
+						<!--displays file type of file -->
             <td>{{this.filetype}}</td>
           </tr>
         {{/each}}
       </table>
+			<!--calls the upload page with the user id, as homepage expects it when called from upload -->
       <p><a href="/upload?userid={{userid}}">Upload new File:</a></p>
 		</main>
 	</body>
