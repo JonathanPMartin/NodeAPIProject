@@ -34,12 +34,13 @@ router.post('/', async ctx => {
 	}
 	myfile.extension = mime.extension(myfile.type)
 	try {
+		const num=1000000
 		// saves the file uploaded to public/uploads
 		await fs.copy(myfile.path, `public/uploads/${myfile.name}`)
 		// below redirects to homepage passing filename and des
 		// as the adding proccess for the database did not work with a router.post statememt
 		ctx.redirect(`/homepage?filetype=${str}+&filename=${body.nameofupload}&des=${body.Details}&\
-userid=${ctx.hbs.userid}&file=${myfile.name}&filesize=${myfile.size/1000000}`)
+userid=${ctx.hbs.userid}&file=${myfile.name}&filesize=${myfile.size/num}`)
 	} catch(err) {
 		console.log(err.message)
 	}
