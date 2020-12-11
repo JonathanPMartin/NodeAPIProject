@@ -39,7 +39,7 @@ router.post('/', async ctx => {
 		// below redirects to homepage passing filename and des
 		// as the adding proccess for the database did not work with a router.post statememt
 		ctx.redirect(`/homepage?filetype=${str}+&filename=${body.nameofupload}&des=${body.Details}&\
-userid=${ctx.hbs.userid}&file=${myfile.name}&filesize=${myfile.size}`)
+userid=${ctx.hbs.userid}&file=${myfile.name}&filesize=${myfile.size/1000000}`)
 	} catch(err) {
 		console.log(err.message)
 	}
